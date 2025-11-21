@@ -85,10 +85,7 @@ const AboutPage = ({ setActivePage }) => (
             Surajbhan Nain <span className="text-red-600">builds gyms</span> that outlast the hype
           </h1>
           <p className="text-zinc-400 text-lg leading-relaxed">
-            From welding shop floors in Faridabad to leading nationwide installs, Surajbhan has
-            architected experiential gyms for pro teams, defense academies, boutique studios, and
-            celebrity trainers. His signature? Zero copy-paste layouts, obsessive detailing, and
-            relentless quality control.
+            Surajbhan Nain is a fitness icon & entrepreneur, known for increasing fitness awareness among people of Punjab. He is a world-famous International Bodybuilding judge, also known for his 20 years of contribution in spreading health and fitness in Punjab, Haryana, Delhi. He has been honored and awarded with several prestigious sports bodies in Punjab and Haryana. He is also associated with Indian body builder’s federation, recognized by Government of India, Punjab bodybuilding association and Chandigarh bodybuilding sports association.
           </p>
           <div className="grid sm:grid-cols-2 gap-4">
             {founderMilestones.map((item) => (
@@ -110,9 +107,9 @@ const AboutPage = ({ setActivePage }) => (
         </div>
         <div>
           <div className="relative">
-            <div className="rounded-3xl overflow-hidden border border-white/10 shadow-[0_20px_80px_rgba(0,0,0,0.6)]">
+            <div className="rounded-3xl items-center overflow-hidden border border-white/10 shadow-[0_20px_80px_rgba(0,0,0,0.6)]">
               <img
-                src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&q=80&w=1200"
+                src="founder.jpeg"
                 alt="Surajbhan Nain"
                 className="w-full h-[26rem] object-cover"
               />
