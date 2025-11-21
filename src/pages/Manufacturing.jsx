@@ -4,7 +4,7 @@ import BentoGrid from '../components/sections/BentoGrid.jsx';
 import ContactSection from '../components/sections/ContactSection.jsx';
 
 const ManufacturingPage = () => (
-  <div className="pt-20">
+  <div className="pt-6 sm:pt-10">
     <div className="py-12 bg-black text-center border-b border-white/5">
       <h1 className="text-5xl font-black text-white uppercase">
         Manufacturing <span className="text-red-600">Pipeline</span>

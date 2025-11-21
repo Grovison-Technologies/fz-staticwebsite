@@ -1,5 +1,6 @@
 import React from 'react';
 import { MessageCircle, FileText } from 'lucide-react';
+import { SITE_CONTACT } from '../../data/siteConfig.js';
 
 const FloatingSidebar = ({ isVisible, openQuote }) => {
   return (
@@ -10,7 +11,7 @@ const FloatingSidebar = ({ isVisible, openQuote }) => {
     >
       <div className="flex flex-col">
         <a
-          href="https://wa.me/"
+          href={`https://wa.me/${SITE_CONTACT.phonePlain}`}
           target="_blank"
           rel="noopener noreferrer"
           className="bg-[#25D366] text-white p-4 hover:bg-[#20b858] transition-colors flex items-center gap-2 group relative"

@@ -2,6 +2,7 @@ import React from 'react';
 import { Phone, Mail, MapPin, Facebook, Instagram, Twitter } from 'lucide-react';
 import SectionHeading from '../common/SectionHeading.jsx';
 import Button from '../common/Button.jsx';
+import { SITE_CONTACT } from '../../data/siteConfig.js';
 
 const ContactSection = () => (
   <section className="py-24 bg-zinc-950 relative">
@@ -15,11 +16,18 @@ const ContactSection = () => (
             <div className="space-y-4">
               <div className="flex items-center gap-4 text-zinc-400">
                 <Phone className="w-5 h-5 text-red-600" />
-                <span>+1 (888) 555-0199</span>
+                <a href={`tel:${SITE_CONTACT.phonePlain}`} className="hover:text-white transition-colors">
+                  {SITE_CONTACT.phoneDisplay}
+                </a>
               </div>
               <div className="flex items-center gap-4 text-zinc-400">
                 <Mail className="w-5 h-5 text-red-600" />
-                <span>sales@fzfitness.com</span>
+                <a
+                  href={`mailto:${SITE_CONTACT.email}`}
+                  className="hover:text-white transition-colors break-all"
+                >
+                  {SITE_CONTACT.email}
+                </a>
               </div>
               <div className="flex items-center gap-4 text-zinc-400">
                 <MapPin className="w-5 h-5 text-red-600" />

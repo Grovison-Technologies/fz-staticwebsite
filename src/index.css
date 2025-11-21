@@ -5,10 +5,26 @@
 :root {
   scroll-behavior: smooth;
   color-scheme: dark;
+  --app-header-height: 120px;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --app-header-height: 150px;
+  }
 }
 
 body {
   transition: background-color 300ms ease, color 300ms ease;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
 
 @media (prefers-reduced-motion: reduce) {

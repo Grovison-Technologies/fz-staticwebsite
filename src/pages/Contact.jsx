@@ -2,8 +2,8 @@ import React from 'react';
 import ContactSection from '../components/sections/ContactSection.jsx';
 
 const ContactPage = () => (
-  <div className="pt-20">
-    <div className="py-12 bg-zinc-950 text-center border-b border-white/5">
+  <div className="pt-6 sm:pt-10">
+    <div className="py-12 mt-[110px] bg-zinc-950 text-center border-b border-white/5">
       <h1 className="text-5xl font-black text-white uppercase">
         Contact <span className="text-red-600">FZ</span>
       </h1>

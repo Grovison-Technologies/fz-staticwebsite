@@ -1,51 +1,141 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { ShieldCheck, TrendingUp, Globe, Users } from 'lucide-react';
 import SectionHeading from '../components/common/SectionHeading.jsx';
 import Button from '../components/common/Button.jsx';
 import ContactSection from '../components/sections/ContactSection.jsx';
 
-const statBlocks = [
-  { label: 'Installations Completed', value: '1,200+' },
-  { label: 'Sq Ft of Powder Coat', value: '80,000+' },
-  { label: 'Partner Gyms Worldwide', value: '50+' },
-  { label: 'Avg. Lead Time', value: '6 Weeks' },
+const founderStats = [
+  { label: 'Gyms Installed', value: 187, suffix: '+', duration: 1800 },
+  { label: 'Cities Powered', value: 42, suffix: '+', duration: 1600 },
+  { label: 'Sq Ft Fabricated', value: 80, suffix: 'K+', duration: 2000 },
+  { label: 'Athletes Supported', value: 6, suffix: 'K+', duration: 2100 },
 ];
 
+const founderMilestones = [
+  {
+    title: 'Strength Architect',
+    copy: 'Designed elite training centers for ISL clubs, defense academies, and global franchises.',
+  },
+  {
+    title: 'Fabrication Pioneer',
+    copy: 'Pioneered modular rigs and powder-coat finishes now standard in premium Indian gyms.',
+  },
+  {
+    title: 'Coach Collaborator',
+    copy: 'Co-created progressive overload templates with 40+ strength coaches nationwide.',
+  },
+  {
+    title: 'Mentor & Speaker',
+    copy: 'Leads workshops for gym owners on scaling revenue through experiential layouts.',
+  },
+];
+
+const CountUpNumber = ({ target, suffix = '', duration = 1800 }) => {
+  const [value, setValue] = useState(0);
+  const ref = useRef(null);
+  const startedRef = useRef(false);
+
+  useEffect(() => {
+    const node = ref.current;
+    if (!node) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !startedRef.current) {
+            startedRef.current = true;
+            const startTime = performance.now();
+
+            const animate = (currentTime) => {
+              const elapsed = currentTime - startTime;
+              const progress = Math.min(elapsed / duration, 1);
+              setValue(Math.floor(progress * target));
+              if (progress < 1) {
+                requestAnimationFrame(animate);
+              }
+            };
+
+            requestAnimationFrame(animate);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [target, duration]);
+
+  return (
+    <span ref={ref} className="text-4xl md:text-5xl font-black text-white">
+      {value.toLocaleString()}
+      <span className="text-red-500">{suffix}</span>
+    </span>
+  );
+};
+
 const AboutPage = ({ setActivePage }) => (
-  <div className="pt-20">
+  <div className="pt-6 sm:pt-10">
     <section className="relative overflow-hidden border-b border-white/5 bg-gradient-to-b from-black via-zinc-950 to-black">
       <div className="absolute inset-0 opacity-30 bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
       <div className="container mx-auto px-6 py-20 relative z-10 grid gap-12 lg:grid-cols-2 items-center">
-        <div>
-          <p className="text-red-500 uppercase tracking-[0.4em] font-bold mb-4">Our Story</p>
+        <div className="space-y-6">
+          <p className="text-red-500 uppercase tracking-[0.4em] font-bold mt-[110px]">Meet the Founder</p>
           <h1 className="text-5xl md:text-6xl font-black text-white uppercase leading-tight">
-            Built By <span className="text-red-600">Engineers</span>, Forged For Athletes
+            Surajbhan Nain <span className="text-red-600">builds gyms</span> that outlast the hype
           </h1>
-          <p className="text-zinc-400 mt-6 text-lg leading-relaxed">
-            FZ Fitness Factory began as a fabrication lab supporting collegiate programs. Today we manufacture fully
-            custom ecosystems for pro facilities, boutique studios, and performance labs worldwide. Every weld, stitch,
-            and finish is executed in-house so nothing is left to chance.
+          <p className="text-zinc-400 text-lg leading-relaxed">
+            From welding shop floors in Faridabad to leading nationwide installs, Surajbhan has
+            architected experiential gyms for pro teams, defense academies, boutique studios, and
+            celebrity trainers. His signature? Zero copy-paste layouts, obsessive detailing, and
+            relentless quality control.
           </p>
-          <div className="flex flex-wrap gap-4 mt-10">
+          <div className="grid sm:grid-cols-2 gap-4">
+            {founderMilestones.map((item) => (
+              <div
+                key={item.title}
+                className="border border-white/10 bg-zinc-950/60 p-4 rounded-xl hover:border-red-600/50 transition-colors"
+              >
+                <h3 className="text-white font-bold text-lg mb-2">{item.title}</h3>
+                <p className="text-zinc-400 text-sm leading-relaxed">{item.copy}</p>
+              </div>
+            ))}
+          </div>
+          <div className="flex flex-wrap gap-4">
             <Button primary onClick={() => setActivePage('equipment')}>
               Explore Equipment
             </Button>
             <Button onClick={() => setActivePage('contact')}>Schedule Facility Tour</Button>
           </div>
         </div>
-        <div className="bg-black border border-white/10 p-8 relative">
-          <div className="grid grid-cols-2 gap-6">
-            {statBlocks.map((stat) => (
-              <div key={stat.label} className="p-4 border border-white/10 text-center">
-                <div className="text-3xl font-black text-white">{stat.value}</div>
-                <div className="text-xs uppercase tracking-widest text-zinc-500 mt-2">
-                  {stat.label}
+        <div>
+          <div className="relative">
+            <div className="rounded-3xl overflow-hidden border border-white/10 shadow-[0_20px_80px_rgba(0,0,0,0.6)]">
+              <img
+                src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&q=80&w=1200"
+                alt="Surajbhan Nain"
+                className="w-full h-[26rem] object-cover"
+              />
+              {/* <div className="absolute bottom-6 left-6 bg-black/70 backdrop-blur px-4 py-3 border border-white/10 rounded-lg">
+                <p className="text-white font-black text-lg uppercase tracking-[0.3em]">
+                  Founder · Fabricator
+                </p>
+                <p className="text-zinc-300 text-sm">FZ Fitness Factory</p>
+              </div> */}
+            </div>
+            <div className="grid grid-cols-2 gap-4 mt-6">
+              {founderStats.map((stat) => (
+                <div
+                  key={stat.label}
+                  className="p-4 border border-white/10 rounded-2xl bg-black/60 backdrop-blur"
+                >
+                  <CountUpNumber target={stat.value} suffix={stat.suffix} duration={stat.duration} />
+                  <p className="text-xs uppercase tracking-[0.4em] text-zinc-500 mt-2">
+                    {stat.label}
+                  </p>
                 </div>
-              </div>
-            ))}
-          </div>
-          <div className="mt-8 text-sm text-zinc-500">
-            Stats updated Q3 2024 · Includes private performance centers and collegiate athletic departments.
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -125,5 +215,3 @@ const AboutPage = ({ setActivePage }) => (
 );
 
 export default AboutPage;
-
-

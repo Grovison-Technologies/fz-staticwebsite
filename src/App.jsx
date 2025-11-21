@@ -79,7 +79,7 @@ const App = () => {
       <FloatingSidebar isVisible={isScrolled} openQuote={openQuote} />
 
       <Suspense fallback={<PageFallback />}>
-        <main>{renderPage()}</main>
+        <main className="relative">{renderPage()}</main>
       </Suspense>
 
       <Footer setActivePage={handleNavigate} />
