@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import NavBar from './components/layout/NavBar.jsx';
 import FloatingSidebar from './components/layout/FloatingSidebar.jsx';
 import Footer from './components/layout/Footer.jsx';
 import QuoteModal from './components/layout/QuoteModal.jsx';
-import HomePage from './pages/Home.jsx';
-import EquipmentPage from './pages/Equipment.jsx';
-import ManufacturingPage from './pages/Manufacturing.jsx';
-import ContactPage from './pages/Contact.jsx';
-import AboutPage from './pages/About.jsx';
+
+const HomePage = lazy(() => import('./pages/Home.jsx'));
+const EquipmentPage = lazy(() => import('./pages/Equipment.jsx'));
+const ManufacturingPage = lazy(() => import('./pages/Manufacturing.jsx'));
+const ContactPage = lazy(() => import('./pages/Contact.jsx'));
+const AboutPage = lazy(() => import('./pages/About.jsx'));
 
 const App = () => {
   const [activePage, setActivePage] = useState('home');
@@ -24,7 +25,18 @@ const App = () => {
   }, []);
 
   const handleNavigate = (page) => {
-    window.scrollTo(0, 0);
+    if (typeof window !== 'undefined') {
+      const prefersReducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
+      const supportsSmoothScroll =
+        typeof document !== 'undefined' && 'scrollBehavior' in document.documentElement.style;
+
+      if (!prefersReducedMotion && supportsSmoothScroll) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        window.scrollTo(0, 0);
+      }
+    }
+
     setActivePage(page);
   };
 
@@ -50,13 +62,25 @@ const App = () => {
     }
   };
 
+  const PageFallback = () => (
+    <div className="flex flex-col items-center justify-center py-24 gap-4 text-gray-400">
+      <span
+        className="h-10 w-10 rounded-full border-2 border-gray-700 border-t-red-600 animate-spin"
+        aria-hidden="true"
+      />
+      <p className="tracking-[0.4em] text-xs uppercase text-gray-500">Loading</p>
+    </div>
+  );
+
   return (
     <div className="bg-black min-h-screen text-white font-sans selection:bg-red-600 selection:text-white relative">
       <NavBar activePage={activePage} setActivePage={handleNavigate} isScrolled={isScrolled} />
 
       <FloatingSidebar isVisible={isScrolled} openQuote={openQuote} />
 
-      <main>{renderPage()}</main>
+      <Suspense fallback={<PageFallback />}>
+        <main>{renderPage()}</main>
+      </Suspense>
 
       <Footer setActivePage={handleNavigate} />
 
