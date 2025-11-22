@@ -65,10 +65,10 @@ const Hero = ({ setActivePage }) => {
           </p>
 
           <div className="flex flex-col md:flex-row gap-6">
-            <Button primary onClick={() => setActivePage('equipment')}>
+            <Button className='rounded-md' primary onClick={() => setActivePage('equipment')}>
               Explore Catalog <ArrowRight className="w-5 h-5" />
             </Button>
-            <Button onClick={() => setActivePage('contact')}>
+            <Button className='rounded-md' onClick={() => setActivePage('contact')}>
               Book Consultation
             </Button>
           </div>

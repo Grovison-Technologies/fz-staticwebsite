@@ -7,12 +7,13 @@ const Footer = ({ setActivePage }) => (
       <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
         <div className="col-span-1 md:col-span-1">
           <div className="flex items-center gap-2 mb-6 cursor-pointer" onClick={() => setActivePage('home')}>
-            <div className="w-8 h-8 bg-red-600 flex items-center justify-center rounded-sm rotate-45">
-              <Dumbbell className="text-white w-4 h-4 -rotate-45" />
+            <div className="w-40 h-27 flex items-center justify-center ">
+              <img src="fzlogo.png" alt="" />
+              {/* <Dumbbell className="text-white w-4 h-4 -rotate-45" /> */}
             </div>
-            <span className="text-xl font-black tracking-tighter text-white uppercase">
+            {/* <span className="text-xl font-black tracking-tighter text-white uppercase">
               FZ<span className="text-red-600">Factory</span>
-            </span>
+            </span> */}
           </div>
           <p className="text-zinc-500 text-sm leading-relaxed">
             Engineering the future of strength. We build equipment for those who refuse to compromise on quality.
@@ -56,7 +57,9 @@ const Footer = ({ setActivePage }) => (
 
       <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center text-zinc-600 text-xs">
         <p>© 2024 FZ Fitness Factory. All rights reserved.</p>
+        <p className='text-white text-sm pt-4' >Developed By <a className='text-green-500 font-serif' href="https://grovison.com/">Grovison Technologies</a></p>
         <div className="flex gap-6 mt-4 md:mt-0">
+          
           <span>Privacy Policy</span>
           <span>Terms of Service</span>
         </div>
